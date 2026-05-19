@@ -25,7 +25,8 @@ export default async function DashboardLayout({ children }: { children: React.Re
             <form action={async () => {
               'use server';
               const { cookies } = await import('next/headers');
-              cookies().set('session', '', { expires: new Date(0) });
+              const cookieStore = await cookies();
+              cookieStore.set('session', '', { expires: new Date(0) });
               redirect('/auth');
             }}>
               <button className="text-sm text-slate-500 hover:text-red-600 font-medium transition-colors">
