@@ -24,13 +24,16 @@ export default function Home() {
             Experience the next generation of telemedicine. Seamless video consultations, AI-powered health insights, and instant bookings with Kerala's top hospitals.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link href="/auth" className="w-full sm:w-auto px-8 py-4 bg-slate-900 text-white font-semibold rounded-xl hover:bg-slate-800 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5">
-              Access Portal
+          <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-4">
+            <Link href="/auth?role=PATIENT" className="w-full sm:w-auto px-8 py-4 bg-slate-900 text-white font-semibold rounded-xl hover:bg-slate-800 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5">
+              Patient Portal
             </Link>
-            <a href="#features" className="w-full sm:w-auto px-8 py-4 bg-white text-slate-700 font-semibold rounded-xl border border-slate-200 hover:bg-slate-50 transition-all shadow-sm">
-              Explore Features
-            </a>
+            <Link href="/auth?role=DOCTOR" className="w-full sm:w-auto px-8 py-4 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5">
+              Doctor Portal
+            </Link>
+            <Link href="/auth?role=HOSPITAL" className="w-full sm:w-auto px-8 py-4 bg-emerald-600 text-white font-semibold rounded-xl hover:bg-emerald-700 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5">
+              Hospital Portal
+            </Link>
           </div>
         </div>
       </section>

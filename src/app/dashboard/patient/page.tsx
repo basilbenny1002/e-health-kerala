@@ -3,6 +3,7 @@ import prisma from '@/lib/prisma';
 import { Calendar, Video, Clock } from 'lucide-react';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
+import DoctorList from './DoctorList';
 
 export default async function PatientDashboard() {
   const session = await getSession();
@@ -65,23 +66,7 @@ export default async function PatientDashboard() {
         {/* Book Appointment Section */}
         <div>
            <h2 className="text-2xl font-bold text-slate-900 mb-6">Book a Doctor</h2>
-           <div className="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm">
-              <div className="p-4 border-b border-slate-100 bg-slate-50">
-                <p className="text-sm font-medium text-slate-600">Available Specialists</p>
-              </div>
-              <div className="divide-y divide-slate-100 max-h-[400px] overflow-y-auto">
-                {doctors.map(doc => (
-                  <div key={doc.id} className="p-4 hover:bg-slate-50 transition-colors">
-                    <h4 className="font-bold text-slate-900">Dr. {doc.user.name}</h4>
-                    <p className="text-xs text-blue-600 font-medium mb-1">{doc.specialization}</p>
-                    <p className="text-xs text-slate-500 mb-3">{doc.hospital?.name || 'Independent'}</p>
-                    <Link href={`/dashboard/patient/book/${doc.id}`} className="block text-center w-full py-2 bg-slate-900 text-white rounded-lg text-sm font-medium hover:bg-slate-800 transition-colors">
-                      Book Slot
-                    </Link>
-                  </div>
-                ))}
-              </div>
-           </div>
+           <DoctorList doctors={doctors as any} />
         </div>
       </div>
     </div>
