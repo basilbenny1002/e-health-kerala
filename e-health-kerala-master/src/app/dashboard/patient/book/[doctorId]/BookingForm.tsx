@@ -69,10 +69,13 @@ export default function BookingForm({ doctorId, slots }: { doctorId: string; slo
       });
 
       if (res.ok) {
+        const data = await res.json();
+        const token = data.appointment?.id?.slice(0, 8).toUpperCase() || 'UNKNOWN';
+        
         alert(
           paymentType === 'ONLINE' 
             ? 'Payment Successful! Appointment Booked Successfully.' 
-            : 'OP Ticket Booked! Please pay at the hospital counter.'
+            : `OP Ticket Booked! Your Token is #${token}. Please pay at the hospital counter.`
         );
         router.push('/dashboard/patient');
       } else {

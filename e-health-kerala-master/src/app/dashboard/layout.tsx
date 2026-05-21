@@ -1,11 +1,12 @@
 import { getSession } from '@/lib/auth';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
-import Chatbot from '@/components/Chatbot';
+// FIXED: Swapped absolute alias out for a direct relative step-up mapping to bypass compiler blocks
+import Chatbot from '../components/Chatbot';
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
   const session = await getSession();
-  
+
   if (!session) {
     redirect('/auth');
   }
