@@ -1,0 +1,78 @@
+'use client';
+
+import Link from 'next/link';
+import { Activity, Globe, ArrowRight, Languages } from 'lucide-react';
+import NearbyHospitals from './components/NearbyHospitals';
+// FIXED: Adjusted absolute import to a local relative path
+import { useLanguage } from './context/LanguageContext';
+
+export default function Home() {
+  const { lang, toggleLang, t } = useLanguage();
+
+  return (
+    <div className="min-h-screen bg-white text-slate-900 font-sans selection:bg-emerald-100">
+      {/* Navigation Bar */}
+      <nav className="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto">
+        <div className="flex items-center gap-2">
+          <div className="bg-slate-900 p-1.5 rounded-lg text-white">
+            <Activity className="w-6 h-6" />
+          </div>
+          <span className="text-xl font-bold tracking-tight">CarePulse</span>
+        </div>
+
+        <div className="hidden md:flex items-center gap-8">
+          <button
+            onClick={toggleLang}
+            className="flex items-center gap-2 text-sm font-semibold text-slate-500 hover:text-slate-900 transition-colors"
+          >
+            <Languages className="w-4 h-4" />
+            {lang === 'en' ? 'മലയാളം' : 'English'}
+          </button>
+          <Link href="/auth?role=HOSPITAL" className="text-sm font-semibold text-slate-500 hover:text-slate-900 tracking-wide transition-colors">
+            {t('facilityNetwork')}
+          </Link>
+          <Link href="/auth?role=PATIENT" className="text-sm font-semibold text-slate-500 hover:text-slate-900 tracking-wide transition-colors">
+            {t('citizenLogin')}
+          </Link>
+          <Link href="/auth?role=DOCTOR" className="px-6 py-2.5 bg-slate-900 text-white text-sm font-semibold rounded-lg hover:bg-slate-800 transition-colors">
+            {t('practitionerConsole')}
+          </Link>
+        </div>
+      </nav>
+
+      {/* Hero Section */}
+      <section className="relative flex flex-col items-center justify-center pt-32 pb-24 px-4">
+
+        {/* Badge */}
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-slate-200 text-slate-600 text-xs font-bold tracking-widest mb-10 shadow-sm">
+          <Globe className="w-3.5 h-3.5" />
+          {t('unifiedInterface')}
+        </div>
+
+        {/* Headlines */}
+        <h1 className="text-center text-6xl md:text-8xl font-extrabold tracking-tight leading-tight mb-8">
+          <span className="block text-slate-900">{t('title')}</span>
+          <span className="block text-emerald-700">{t('subtitle')}</span>
+        </h1>
+
+        {/* Subtitle */}
+        <p className="text-center text-lg md:text-xl text-slate-500 max-w-3xl mx-auto mb-12 leading-relaxed">
+          {t('description')}
+        </p>
+
+        {/* Action Buttons */}
+        <div className="flex flex-col sm:flex-row items-center gap-4">
+          <Link href="/auth?role=PATIENT" className="w-full sm:w-auto px-8 py-3.5 bg-slate-900 text-white text-sm font-bold rounded-lg hover:bg-slate-800 transition-all shadow-md">
+            {t('citizenEnrollment')}
+          </Link>
+          <Link href="/auth?role=HOSPITAL" className="w-full sm:w-auto px-8 py-3.5 bg-white text-slate-700 border border-slate-200 text-sm font-bold rounded-lg hover:bg-slate-50 transition-all flex items-center justify-center gap-2">
+            {t('findFacility')} <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+      </section>
+
+      {/* Nearby Hospitals API Integration */}
+      <NearbyHospitals />
+    </div>
+  );
+}
